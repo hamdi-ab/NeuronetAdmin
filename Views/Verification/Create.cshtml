@@ -1,0 +1,48 @@
+@model NeuronetAdmin.Models.VerificationRecord
+
+@{
+    ViewData["Title"] = "Create Verification Request";
+}
+
+<h1>Create Verification Request</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group mb-3">
+                <label asp-for="CounselorId" class="control-label">Counselor ID (User ID)</label>
+                <input asp-for="CounselorId" class="form-control" />
+                <span asp-validation-for="CounselorId" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group mb-3">
+                <label asp-for="CounselorName" class="control-label"></label>
+                <input asp-for="CounselorName" class="form-control" />
+                <span asp-validation-for="CounselorName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="ProfessionalAffiliation" class="control-label"></label>
+                <input asp-for="ProfessionalAffiliation" class="form-control" />
+                <span asp-validation-for="ProfessionalAffiliation" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="InstitutionalEmail" class="control-label"></label>
+                <input asp-for="InstitutionalEmail" class="form-control" />
+                <span asp-validation-for="InstitutionalEmail" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="container mt-4">
+    <div class="card shadow-sm border-0 bg-light">
+        <div class="card-body p-5">
+            <h1 class="display-5 text-primary mb-4">@ViewData["Title"]</h1>
+            <p class="lead">At <strong>NEURONET</strong>, your privacy and data security are our top priorities.</p>
+            
+            <hr class="my-4">
+
+            <section class="mb-4">
+                <h3><i class="bi bi-shield-check text-success"></i> Data Protection</h3>
+                <p>We use industry-standard encryption to protect all personal and medical information processed by our AI-driven systems. Information is only accessible to authorized clinical personnel.</p>
+            </section>
+
+            <section class="mb-4">
+                <h3><i class="bi bi-person-badge text-info"></i> Counselor Verification</h3>
+                <p>All counselors on the NEURONET platform undergo a rigorous manual verification process by our administrators to ensure professional credentials and institutional affiliations are valid.</p>
+            </section>
+
+            <section class="mb-4">
+                <h3><i class="bi bi-cpu text-warning"></i> Ethical AI Use</h3>
+                <p>Our AI models for early detection are designed with fairness and transparency in mind. We do not use personal data for third-party marketing, and all automated systems are supervised by human professionals.</p>
+            </section>
+
+            <section class="mb-4">
+                <h3><i class="bi bi-clock-history text-muted"></i> Data Retention</h3>
+                <p>Records are kept only for as long as necessary to provide clinical support and ensure audit compliance. Users may request account deletion at any time via the support channel.</p>
+            </section>
+
+            <div class="mt-5 p-3 bg-white rounded border">
+                <p class="mb-0 text-muted small">
+                    Last Updated: @DateTime.Now.ToLongDateString()<br />
+                    For questions regarding your data, please contact <a href="mailto:privacy@neunoret.io">privacy@neunoret.io</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

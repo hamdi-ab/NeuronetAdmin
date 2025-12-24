@@ -1,0 +1,44 @@
+@model NeuronetAdmin.Models.VerificationRecord
+
+@{
+    ViewData["Title"] = "Verification Details";
+}
+
+<h1>Verification Details</h1>
+
+<div>
+    <h4>Record #@Model.Id</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-3">Counselor Name</dt>
+        <dd class = "col-sm-9">@Model.CounselorName</dd>
+        
+        <dt class = "col-sm-3">Affiliation</dt>
+        <dd class = "col-sm-9">@Model.ProfessionalAffiliation</dd>
+        
+        <dt class = "col-sm-3">Email</dt>
+        <dd class = "col-sm-9">@Model.InstitutionalEmail</dd>
+        
+        <dt class = "col-sm-3">Status</dt>
+        <dd class = "col-sm-9">
+            <span class="badge @(Model.Status == NeuronetAdmin.Models.VerificationStatus.Verified ? "bg-success" : (Model.Status == NeuronetAdmin.Models.VerificationStatus.Rejected ? "bg-danger" : "bg-warning text-dark"))">
+                @Model.Status
+            </span>
+        </dd>
+        
+        <dt class = "col-sm-3">Date</dt>
+        <dd class = "col-sm-9">@Model.RequestDate</dd>
+    </dl>
+</div>
+<div>
+    @if (Model.Status == NeuronetAdmin.Models.VerificationStatus.Pending)
+    {
+        <form asp-action="Approve" asp-route-id="@Model.Id" method="post" class="d-inline">
+            <button type="submit" class="btn btn-success">Approve</button>
+        </form>
+        <form asp-action="Reject" asp-route-id="@Model.Id" method="post" class="d-inline">
+            <button type="submit" class="btn btn-danger">Reject</button>
+        </form>
+    }
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

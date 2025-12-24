@@ -1,0 +1,62 @@
+@model IEnumerable<NeuronetAdmin.Models.ViewModels.UserListViewModel>
+
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<NeuronetAdmin.Models.ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "User Management";
+    var currentUserId = UserManager.GetUserId(User);
+}
+
+<h1>User Management</h1>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <a asp-action="Create" class="btn btn-primary">Create New User</a>
+
+    <form asp-action="Index" method="get" class="d-flex">
+        <select name="roleFilter" class="form-control me-2" asp-items="@ViewBag.Roles">
+            <option value="">All Roles</option>
+        </select>
+        <input type="text" name="searchString" value="@ViewBag.SearchString" class="form-control me-2" placeholder="Search by Name or Email..." />
+        <button type="submit" class="btn btn-outline-success">Search</button>
+        @if (!string.IsNullOrEmpty(ViewBag.SearchString as string) || !string.IsNullOrEmpty(ViewBag.RoleFilter as string))
+        {
+            <a asp-action="Index" class="btn btn-link">Reset</a>
+        }
+    </form>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@item.FullName</td>
+            <td>@item.Email</td>
+            <td>@item.Role</td>
+            <td>
+                @if(item.IsActive) { <span class="badge bg-success">Active</span> }
+                else { <span class="badge bg-danger">Inactive</span> }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                @if (item.Id != currentUserId)
+                {
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                }
+                else
+                {
+                    <button class="btn btn-sm btn-secondary" disabled>Current User</button>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

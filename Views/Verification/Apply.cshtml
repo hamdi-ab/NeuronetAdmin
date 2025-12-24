@@ -1,0 +1,65 @@
+@model NeuronetAdmin.Models.ViewModels.CounselorApplicationViewModel
+
+@{
+    ViewData["Title"] = "Apply as Counselor";
+    Layout = "_Layout"; // Use standard layout, assuming navbar handles anonymous users correctly
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">Join Neuronet as a Counselor</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text text-muted mb-4">
+                        Please provide your professional details below. Our team will review your credentials and verify your account.
+                    </p>
+    <form asp-action="Apply">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        
+        <div class="form-group mb-3">
+            <label asp-for="CounselorName" class="form-label">Full Name</label>
+            <input asp-for="CounselorName" class="form-control" placeholder="Dr. Jane Doe" autocomplete="off"/>
+            <span asp-validation-for="CounselorName" class="text-danger"></span>
+        </div>
+        
+        <div class="form-group mb-3">
+            <label asp-for="ProfessionalAffiliation" class="form-label">Professional Affiliation / License ID</label>
+            <input asp-for="ProfessionalAffiliation" class="form-control" placeholder="e.g., Clinical Psychologist, Lic #12345" autocomplete="off"/>
+            <span asp-validation-for="ProfessionalAffiliation" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="InstitutionalEmail" class="form-label">Institutional Email</label>
+            <input asp-for="InstitutionalEmail" class="form-control" type="email" placeholder="jane.doe@hospital.org" autocomplete="off"/>
+            <span asp-validation-for="InstitutionalEmail" class="text-danger"></span>
+        </div>
+        
+        <div class="form-group mb-3">
+             <label asp-for="Password" class="form-label">Password</label>
+             <input asp-for="Password" class="form-control" autocomplete="new-password"/>
+             <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        
+        <div class="form-group mb-3">
+             <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
+             <input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password"/>
+             <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary btn-lg">Submit Application</button>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+        </div>
+    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,20 @@
+@{
+    ViewData["Title"] = "Application Submitted";
+}
+
+<div class="container mt-5 text-center">
+    <div class="card shadow p-5">
+        <div class="card-body">
+            <h1 class="display-4 text-success mb-4"><i class="bi bi-check-circle-fill"></i> Success!</h1>
+            <h2 class="card-title">Application Submitted</h2>
+            <p class="lead mt-3">
+                Thank you for applying to join Neuronet. Your verification request has been received.
+            </p>
+            <p class="text-muted">
+                Our administrators will review your professional credentials. You will receive an email once your account is verified and ready.
+            </p>
+            <hr class="my-4">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary btn-lg">Return Home</a>
+        </div>
+    </div>
+</div>

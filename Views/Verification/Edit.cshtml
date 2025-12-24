@@ -1,0 +1,60 @@
+@model NeuronetAdmin.Models.VerificationRecord
+
+@{
+    ViewData["Title"] = "Edit Verification Record";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                    <h3 class="mb-0">Edit Record</h3>
+                    <span class="badge bg-info">ID: @Model.Id</span>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="CounselorId" />
+                        <input type="hidden" asp-for="RequestDate" />
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="CounselorName" class="form-label font-weight-bold">Counselor Name</label>
+                                <input asp-for="CounselorName" class="form-control" />
+                                <span asp-validation-for="CounselorName" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="InstitutionalEmail" class="form-label font-weight-bold">Email Address</label>
+                                <input asp-for="InstitutionalEmail" class="form-control" />
+                                <span asp-validation-for="InstitutionalEmail" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="ProfessionalAffiliation" class="form-label font-weight-bold">Affiliation / License</label>
+                            <input asp-for="ProfessionalAffiliation" class="form-control" />
+                            <span asp-validation-for="ProfessionalAffiliation" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Status" class="form-label font-weight-bold">Current Status</label>
+                            <select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList<NeuronetAdmin.Models.VerificationStatus>()"></select>
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a asp-action="Index" class="btn btn-outline-secondary me-md-2">Cancel</a>
+                            <button type="submit" class="btn btn-primary px-5">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

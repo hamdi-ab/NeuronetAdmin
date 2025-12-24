@@ -1,0 +1,54 @@
+@model IEnumerable<NeuronetAdmin.Models.VerificationRecord>
+
+@{
+    ViewData["Title"] = "Counselor Verification";
+}
+
+<h1>Counselor Verification</h1>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <a asp-action="Create" class="btn btn-primary">New Request</a>
+
+    <form asp-action="Index" method="get" class="d-flex align-items-center">
+        <label class="me-2">Filter by Status:</label>
+        <select name="statusFilter" class="form-control me-2" asp-items="Html.GetEnumSelectList<NeuronetAdmin.Models.VerificationStatus>()" onchange="this.form.submit()">
+            <option value="">All Statuses</option>
+            @* Pre-selecting is handled by browser if value matches, or we can use TagHelpers properly if we bind to a viewmodel *@
+        </select>
+        <noscript><button type="submit" class="btn btn-outline-secondary">Filter</button></noscript>
+        @if (ViewBag.StatusFilter != null)
+        {
+             <a asp-action="Index" class="btn btn-link">Clear</a>
+        }
+    </form>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Counselor Name</th>
+            <th>Affiliation</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Requested Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr class="@(item.Status == NeuronetAdmin.Models.VerificationStatus.Pending ? "table-warning" : "")">
+            <td>@Html.DisplayFor(modelItem => item.CounselorName)</td>
+            <td>@Html.DisplayFor(modelItem => item.ProfessionalAffiliation)</td>
+            <td>@Html.DisplayFor(modelItem => item.InstitutionalEmail)</td>
+            <td>@item.Status</td>
+            <td>@item.RequestDate.ToShortDateString()</td>
+            <td>
+                <div class="btn-group" role="group">
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info text-white">Details</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning text-white">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
